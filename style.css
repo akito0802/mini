@@ -1,35 +1,35 @@
 
 body {
-    font-family: sans-serif;
-    text-align: center;
-    margin: 2em;
-    background-color: #ffffff;
+  margin: 0;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  background-color: #000;
 }
 
-h1 {
-    font-size: 2em;
-    margin-bottom: 1em;
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('A_digital_illustration_depicts_a_nighttime_scene_c.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }
 
-select {
-    margin: 0 0.5em;
-    padding: 0.5em;
-    font-size: 1em;
+.main-container {
+  padding: 2rem;
+  text-align: center;
 }
 
-#result {
-    margin-top: 2em;
-    font-size: 1.2em;
+.title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 2rem;
 }
 
-
-.scale-table {
-    margin: 1em auto;
-    border-collapse: collapse;
-}
-
-.scale-table th, .scale-table td {
-    border: 1px solid #999;
-    padding: 0.5em 1em;
-    font-size: 1.1em;
+.selector-box select {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
