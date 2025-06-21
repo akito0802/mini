@@ -5,14 +5,6 @@
     <meta charset="UTF-8">
     <title>スケール構成音表示</title>
     <style>
-body {
-  background-image: url('tber_bg_final.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: white;
-}
         body {
             font-family: sans-serif;
             text-align: center;
@@ -47,63 +39,60 @@ body {
             font-size: 1.1em;
         }
     
-    .neon-logo {
-        font-size: 2.5em;
-        font-weight: bold;
-        padding: 0.5em 1em;
-        border: 3px solid #fff;
-        border-radius: 12px;
-        display: inline-block;
-        background-color: #111;
-        box-shadow: 0 0 10px #67e8f9, 0 0 20px #fb7185, 0 0 30px #fff;
-        color: white;
-    }
-    
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap');
+
+body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    margin: 0;
+    padding: 2em;
+    background: linear-gradient(135deg, #5b3cc4, #1b6ca8);
+    color: white;
+    text-align: center;
+}
+
+.neon-logo {
+    font-size: 2.5em;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border-radius: 12px;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    color: white;
+    margin-bottom: 1em;
+}
+
+select {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    backdrop-filter: blur(6px);
+    margin: 0.5em;
+}
+
+select:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fb7185;
+}
 
 .scale-table {
-    margin: 1em auto;
+    margin: 2em auto;
     border-collapse: collapse;
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 15px #0ff;
-    border: 2px solid #0ff;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
 .scale-table th, .scale-table td {
-    border: 1px solid #67e8f9;
-    padding: 0.75em 1.5em;
-    font-size: 1.1em;
-    text-shadow: 0 0 5px #0ff;
-}
-
-.scale-table th {
-    background-color: rgba(103, 232, 249, 0.2);
-    color: #67e8f9;
-    font-weight: bold;
-}
-
-.scale-table tr:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-
-select {
-    background-color: black;
-    color: #fff;
-    border: 2px solid #fb7185;
-    border-radius: 6px;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    box-shadow: 0 0 8px #fb7185, 0 0 12px #fb7185;
-    text-shadow: 0 0 3px #fff;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-select:focus {
-    outline: none;
-    box-shadow: 0 0 10px #fb7185, 0 0 20px #fb7185;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1em 1.5em;
+    color: white;
 }
 
 </style>
@@ -191,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </head>
 <body>
-    <h1 class="neon-logo"><span style="color:#67e8f9;">T</span><span style="color:#fff;">ber</span><span style="color:#fb7185;">S</span>cale</h1>
+    <h1><span style="color:#67e8f9;">T</span><span style="color:#000;">ber</span><span style="color:#fb7185;">S</span>cale</h1>
     <div>
         <label for="key-select">キー:</label>
         <select id="key-select">
