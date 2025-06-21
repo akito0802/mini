@@ -1,76 +1,71 @@
 
-document.addEventListener('DOMContentLoaded', () => {
-    const keySelect = document.getElementById('key-select');
-    const typeSelect = document.getElementById('type-select');
-    const scaleSelect = document.getElementById('scale-select');
-    const result = document.getElementById('result');
+const scales = {
+  major: {
+    'C': ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
+    'D': ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'],
+    'E': ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'],
+    'F': ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'],
+    'G': ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
+    'A': ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'],
+    'B': ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#']
+  },
+  minor: {
+    'C': ['C', 'D', 'Eb', 'F', 'G', 'Ab', 'Bb'],
+    'D': ['D', 'E', 'F', 'G', 'A', 'Bb', 'C'],
+    'E': ['E', 'F#', 'G', 'A', 'B', 'C', 'D'],
+    'F': ['F', 'G', 'Ab', 'Bb', 'C', 'Db', 'Eb'],
+    'G': ['G', 'A', 'Bb', 'C', 'D', 'Eb', 'F'],
+    'A': ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+    'B': ['B', 'C#', 'D', 'E', 'F#', 'G', 'A']
+  },
+  jazz: {
+    'C': ['C', 'Db', 'Eb', 'E', 'F#', 'Ab', 'Bb'],  // オルタード
+    'D': ['D', 'Eb', 'F', 'F#', 'G#', 'Bb', 'C'],    // オルタード
+    'E': ['E', 'F', 'G', 'G#', 'A#', 'C', 'D'],      // オルタード
+    'F': ['F', 'Gb', 'Ab', 'A', 'B', 'Db', 'Eb'],
+    'G': ['G', 'Ab', 'Bb', 'B', 'C#', 'D', 'F'],
+    'A': ['A', 'Bb', 'C', 'C#', 'D#', 'F', 'G'],
+    'B': ['B', 'C', 'D', 'D#', 'F', 'G', 'A']
+  }
+};
 
-    const scaleOptions = {
-        major: [
-            { value: 'major', label: 'メジャースケール' },
-            { value: 'pentatonic', label: 'ペンタトニックスケール' },
-            { value: 'blues', label: 'ブルーススケール' }
-        ],
-        minor: [
-            { value: 'natural', label: 'ナチュラルマイナースケール' },
-            { value: 'harmonic', label: 'ハーモニックマイナースケール' },
-            { value: 'melodic', label: 'メロディックマイナースケール' },
-            { value: 'pentatonic', label: 'ペンタトニックスケール' },
-            { value: 'blues', label: 'ブルーススケール' }
-        ],
-        church: [
-            { value: 'ionian', label: 'アイオニアン' },
-            { value: 'dorian', label: 'ドリアン' },
-            { value: 'phrygian', label: 'フリジアン' },
-            { value: 'lydian', label: 'リディアン' },
-            { value: 'mixolydian', label: 'ミクソリディアン' },
-            { value: 'aeolian', label: 'エオリアン' },
-            { value: 'locrian', label: 'ロクリアン' }
-        ]
-    };
+const scaleNames = {
+  major: ['メジャースケール'],
+  minor: ['ナチュラルマイナースケール'],
+  jazz: ['オルタードスケール']
+};
 
-    function updateScaleOptions() {
-        const type = typeSelect.value;
-        scaleSelect.innerHTML = '';
-        scaleOptions[type].forEach(option => {
-            const opt = document.createElement('option');
-            opt.value = option.value;
-            opt.textContent = option.label;
-            scaleSelect.appendChild(opt);
-        });
-        scaleSelect.selectedIndex = 0;
-    }
+document.getElementById("type-select").addEventListener("change", updateScales);
+document.getElementById("key-select").addEventListener("change", displayScale);
+document.getElementById("scale-select").addEventListener("change", displayScale);
 
-    function updateDisplay() {
-        const key = keySelect.value;
-        const type = typeSelect.value;
-        const scale = scaleSelect.value;
+function updateScales() {
+  const type = document.getElementById("type-select").value;
+  const select = document.getElementById("scale-select");
+  select.innerHTML = '';
+  scaleNames[type].forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+  displayScale();
+}
 
-        const scaleData = scales?.[key]?.[type]?.[scale];
-        if (scaleData && Array.isArray(scaleData)) {
-            const label = scaleSelect.options[scaleSelect.selectedIndex].text;
-            let html = `<strong>${key} ${label}の構成音:</strong><br><table class="scale-table"><tr>`;
-            for (const note of scaleData) {
-                html += `<th>${note.degree}</th>`;
-            }
-            html += "</tr><tr>";
-            for (const note of scaleData) {
-                html += `<td>${note.note}</td>`;
-            }
-            html += "</tr></table>";
-            result.innerHTML = html;
-        } else {
-            result.innerHTML = "データが見つかりません";
-        }
-    }
+function displayScale() {
+  const key = document.getElementById("key-select").value;
+  const type = document.getElementById("type-select").value;
+  const table = document.getElementById("note-table");
+  table.innerHTML = '';
+  if (!scales[type][key]) return;
+  const row = document.createElement("tr");
+  scales[type][key].forEach(note => {
+    const td = document.createElement("td");
+    td.textContent = note;
+    row.appendChild(td);
+  });
+  table.appendChild(row);
+}
 
-    keySelect.addEventListener('change', updateDisplay);
-    typeSelect.addEventListener('change', () => {
-        updateScaleOptions();
-        updateDisplay();
-    });
-    scaleSelect.addEventListener('change', updateDisplay);
-
-    updateScaleOptions();
-    updateDisplay();
-});
+// 初期化
+updateScales();
