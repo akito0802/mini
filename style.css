@@ -21,3 +21,15 @@ select {
     margin-top: 2em;
     font-size: 1.2em;
 }
+
+
+.scale-table {
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+.scale-table th, .scale-table td {
+    border: 1px solid #999;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+}

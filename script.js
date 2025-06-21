@@ -5,17 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scaleSelect = document.getElementById('scale-select');
     const result = document.getElementById('result');
 
-    
-const scaleOptions = {
-    church: [
-        { value: 'ionian', label: 'アイオニアン' },
-        { value: 'dorian', label: 'ドリアン' },
-        { value: 'phrygian', label: 'フリジアン' },
-        { value: 'lydian', label: 'リディアン' },
-        { value: 'mixolydian', label: 'ミクソリディアン' },
-        { value: 'aeolian', label: 'エオリアン' },
-        { value: 'locrian', label: 'ロクリアン' }
-    ],
+    const scaleOptions = {
         major: [
             { value: 'major', label: 'メジャースケール' },
             { value: 'pentatonic', label: 'ペンタトニックスケール' },
@@ -27,6 +17,15 @@ const scaleOptions = {
             { value: 'melodic', label: 'メロディックマイナースケール' },
             { value: 'pentatonic', label: 'ペンタトニックスケール' },
             { value: 'blues', label: 'ブルーススケール' }
+        ],
+        church: [
+            { value: 'ionian', label: 'アイオニアン' },
+            { value: 'dorian', label: 'ドリアン' },
+            { value: 'phrygian', label: 'フリジアン' },
+            { value: 'lydian', label: 'リディアン' },
+            { value: 'mixolydian', label: 'ミクソリディアン' },
+            { value: 'aeolian', label: 'エオリアン' },
+            { value: 'locrian', label: 'ロクリアン' }
         ]
     };
 
@@ -39,7 +38,7 @@ const scaleOptions = {
             opt.textContent = option.label;
             scaleSelect.appendChild(opt);
         });
-        scaleSelect.selectedIndex = 0; // ← ここで初期値をリセット
+        scaleSelect.selectedIndex = 0;
     }
 
     function updateDisplay() {
@@ -49,9 +48,13 @@ const scaleOptions = {
 
         const scaleData = scales?.[key]?.[type]?.[scale];
         if (scaleData && Array.isArray(scaleData)) {
-            const formatted = scaleData.map(note => `${note.note}（${note.degree}）`).join(', ');
             const label = scaleSelect.options[scaleSelect.selectedIndex].text;
-            result.innerHTML = `<strong>${key} ${label}の構成音:</strong><br>${formatted}`;
+            let html = `<strong>${key} ${label}の構成音:</strong><br><table class="scale-table"><tr><th>音名</th><th>度数</th></tr>`;
+            for (const note of scaleData) {
+                html += `<tr><td>${note.note}</td><td>${note.degree}</td></tr>`;
+            }
+            html += `</table>`;
+            result.innerHTML = html;
         } else {
             result.innerHTML = "データが見つかりません";
         }
