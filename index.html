@@ -2,9 +2,43 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>スケール構成音表示</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin: 2em;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        select {
+            margin: 0 0.5em;
+            padding: 0.5em;
+            font-size: 1em;
+        }
+
+        #result {
+            margin-top: 2em;
+            font-size: 1.2em;
+        }
+
+        .scale-table {
+            margin: 1em auto;
+            border-collapse: collapse;
+        }
+
+        .scale-table th, .scale-table td {
+            border: 1px solid #999;
+            padding: 0.5em 1em;
+            font-size: 1.1em;
+        }
+    </style>
     <script src="scales.js"></script>
     <script src="script.js" defer></script>
 </head>
@@ -35,12 +69,8 @@
         </select>
 
         <label for="scale-select">スケール名:</label>
-        <select id="scale-select">
-            <option value="major">メジャースケール</option>
-            <option value="pentatonic">ペンタトニックスケール</option>
-            <option value="blues">ブルーススケール</option>
-        </select>
+        <select id="scale-select"></select>
     </div>
-    <div id="result" style="margin-top: 20px;"></div>
+    <div id="result"></div>
 </body>
 </html>
