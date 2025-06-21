@@ -1,88 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TberScale</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="background"></div>
-    <div class="main-container">
-      <div class="title">Tber<span class="pink">Scale</span></div>
-      <div class="selector-box">
-        <select id="key-select">
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-          <option value="G">G</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-        </select>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TberScale - ジャズスケール対応</title>
+  <style>
+    body {
+      background-color: #0f0f1a;
+      color: white;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      padding: 20px;
+    }
+    .selector-box {
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 10px;
+      background-color: black;
+      color: pink;
+      border: 1px solid #ccc;
+    }
+    .output-box {
+      font-size: 1.2rem;
+      color: #0ff;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TberScale</h1>
+  <div class="selector-box">
+    <select id="key-select">
+      <option value="C">C</option>
+    </select>
+    <select id="category-select">
+      <option value="major">メジャー</option>
+      <option value="minor">マイナー</option>
+      <option value="church">チャーチモード</option>
+      <option value="jazz">ジャズ</option>
+    </select>
+    <select id="scale-select"></select>
+  </div>
+  <div class="output-box" id="output">構成音がここに表示されます</div>
 
-        <select id="scale-type-select">
-          <option value="major">major</option>
-          <option value="minor">minor</option>
-          <option value="church">church</option>
-          <option value="jazz">jazz</option>
-        </select>
+  <script src="data.js"></script>
+  <script>
+    const keySelect = document.getElementById("key-select");
+    const categorySelect = document.getElementById("category-select");
+    const scaleSelect = document.getElementById("scale-select");
+    const output = document.getElementById("output");
 
-        <select id="scale-select">
-          <!-- placeholder, will be populated dynamically -->
-        </select>
-      </div>
+    const scaleOptions = {
+      major: ["メジャー"],
+      minor: ["ナチュラルマイナー"],
+      church: ["Ionian"],
+      jazz: ["オルタード", "ホールトーン", "ディミニッシュ"]
+    };
 
-      <div class="fretboard">
-        <img id="fretboard-image" src="images/fretboard/C_major_fretboard.png" alt="Fretboard" />
-      </div>
-    </div>
+    const scaleKeys = {
+      "オルタード": "C_jazz_altered",
+      "ホールトーン": "C_jazz_whole_tone",
+      "ディミニッシュ": "C_jazz_diminished"
+    };
 
-    <script>
-      const keySelect = document.getElementById("key-select");
-      const scaleTypeSelect = document.getElementById("scale-type-select");
-      const scaleSelect = document.getElementById("scale-select");
-      const fretboardImage = document.getElementById("fretboard-image");
-
-      const scaleOptions = {
-        major: ["major", "pentatonic", "blues"],
-        minor: ["natural_minor", "harmonic_minor", "melodic_minor", "pentatonic", "blues"],
-        church: ["ionian", "dorian", "phrygian", "lydian", "mixolydian", "aeolian", "locrian"],
-        jazz: ["altered", "whole_tone", "diminished"]
-      };
-
-      function populateScaleSelect(type) {
-        scaleSelect.innerHTML = "";
-        scaleOptions[type].forEach((scale) => {
-          const option = document.createElement("option");
-          option.value = scale;
-          option.textContent = scale;
-          scaleSelect.appendChild(option);
-        });
-      }
-
-      function updateImage() {
-        const key = keySelect.value;
-        const scale = scaleSelect.value;
-        const scaleType = scaleTypeSelect.value;
-        let filename = `${key}_${scale}`;
-        if (scaleType === "church") filename = `${key}_church_${scale}`;
-        else if (scaleType === "jazz") filename = `${key}_jazz_${scale}`;
-        fretboardImage.src = `images/fretboard/${filename}_fretboard.png`;
-      }
-
-      scaleTypeSelect.addEventListener("change", () => {
-        const selectedType = scaleTypeSelect.value;
-        populateScaleSelect(selectedType);
-        updateImage();
+    function updateScaleOptions() {
+      const category = categorySelect.value;
+      scaleSelect.innerHTML = "";
+      scaleOptions[category].forEach(opt => {
+        const option = document.createElement("option");
+        option.text = opt;
+        option.value = opt;
+        scaleSelect.appendChild(option);
       });
+      updateOutput();
+    }
 
-      keySelect.addEventListener("change", updateImage);
-      scaleSelect.addEventListener("change", updateImage);
+    function updateOutput() {
+      const category = categorySelect.value;
+      const scale = scaleSelect.value;
+      if (category === "jazz") {
+        const key = scaleKeys[scale];
+        output.textContent = scaleData[key] || "構成音が見つかりません";
+      } else {
+        output.textContent = "（このカテゴリはまだ構成音データ未対応）";
+      }
+    }
 
-      // 初期設定
-      populateScaleSelect(scaleTypeSelect.value);
-      updateImage();
-    </script>
-  </body>
+    categorySelect.addEventListener("change", updateScaleOptions);
+    scaleSelect.addEventListener("change", updateOutput);
+
+    updateScaleOptions(); // 初期化
+  </script>
+</body>
 </html>
