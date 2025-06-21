@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>スケール構成音表示</title>
+    <script src="scales.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>スケール構成音表示</h1>
+    <div>
+        <label for="key-select">キー:</label>
+        <select id="key-select">
+            <option value="C">C</option>
+        </select>
+
+        <label for="type-select">分類:</label>
+        <select id="type-select">
+            <option value="major">メジャー</option>
+        </select>
+
+        <label for="scale-select">スケール名:</label>
+        <select id="scale-select">
+            <option value="major">メジャースケール</option>
+            <option value="pentatonic">ペンタトニックスケール</option>
+            <option value="blues">ブルーススケール</option>
+        </select>
+    </div>
+    <div id="result" style="margin-top: 20px;"></div>
+</body>
+</html>
