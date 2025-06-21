@@ -30,3 +30,15 @@ scaleSelect.addEventListener("change", () => {
 
 // 初期表示設定
 typeSelect.dispatchEvent(new Event("change"));
+
+
+function displayScaleNotes(scaleData) {
+  const notesDiv = document.getElementById('scale-notes');
+  if (!notesDiv) return;
+
+  if (scaleData.notes && Array.isArray(scaleData.notes)) {
+    notesDiv.innerHTML = '<strong>構成音:</strong> ' + scaleData.notes.join(' - ');
+  } else {
+    notesDiv.innerHTML = '';
+  }
+}
