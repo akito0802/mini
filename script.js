@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             opt.textContent = option.label;
             scaleSelect.appendChild(opt);
         });
+        scaleSelect.selectedIndex = 0; // ← ここで初期値をリセット
     }
 
     function updateDisplay() {
