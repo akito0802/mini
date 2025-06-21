@@ -49,11 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const scaleData = scales?.[key]?.[type]?.[scale];
         if (scaleData && Array.isArray(scaleData)) {
             const label = scaleSelect.options[scaleSelect.selectedIndex].text;
-            let html = `<strong>${key} ${label}の構成音:</strong><br><table class="scale-table"><tr><th>音名</th><th>度数</th></tr>`;
+            let html = `<strong>${key} ${label}の構成音:</strong><br><table class="scale-table"><tr>`;
             for (const note of scaleData) {
-                html += `<tr><td>${note.note}</td><td>${note.degree}</td></tr>`;
+                html += `<th>${note.degree}</th>`;
             }
-            html += `</table>`;
+            html += "</tr><tr>";
+            for (const note of scaleData) {
+                html += `<td>${note.note}</td>`;
+            }
+            html += "</tr></table>";
             result.innerHTML = html;
         } else {
             result.innerHTML = "データが見つかりません";
