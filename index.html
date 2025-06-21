@@ -8,17 +8,16 @@
     body {
       margin: 0;
       font-family: 'Zen Maru Gothic', sans-serif;
-      background: linear-gradient(135deg, #6e00ff, #00bfff);
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: white;
     }
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
+    .main-container {
+      background-color: rgba(0, 0, 0, 0.4);
       padding: 2em;
-      margin: 2em auto;
-      max-width: 800px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      margin: 3em auto;
+      max-width: 900px;
+      border-radius: 20px;
     }
     h1 {
       text-align: center;
@@ -55,7 +54,7 @@
   </style>
 </head>
 <body>
-  <div class="glass-panel">
+  <div class="main-container">
     <h1><span style="color:#67e8f9;">T</span><span style="color:white">ber</span><span style="color:#fb7185;">Scale</span></h1>
     <div style="text-align:center;">
       <select id="key-select"></select>
