@@ -5,7 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const scaleSelect = document.getElementById('scale-select');
     const result = document.getElementById('result');
 
-    const scaleOptions = {
+    
+const scaleOptions = {
+    church: [
+        { value: 'ionian', label: 'アイオニアン' },
+        { value: 'dorian', label: 'ドリアン' },
+        { value: 'phrygian', label: 'フリジアン' },
+        { value: 'lydian', label: 'リディアン' },
+        { value: 'mixolydian', label: 'ミクソリディアン' },
+        { value: 'aeolian', label: 'エオリアン' },
+        { value: 'locrian', label: 'ロクリアン' }
+    ],
         major: [
             { value: 'major', label: 'メジャースケール' },
             { value: 'pentatonic', label: 'ペンタトニックスケール' },
