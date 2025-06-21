@@ -60,3 +60,27 @@ body, html {
   padding: 10px 20px;
   font-size: 16px;
 }
+
+.tber-header {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 48px;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.tber-header .t {
+  color: #67e8f9;
+  text-shadow: 0 0 8px #67e8f9, 0 0 15px #67e8f9;
+}
+
+.tber-header .ber {
+  color: white;
+  text-shadow: none;
+}
+
+.tber-header .scale {
+  color: #fb7185;
+  text-shadow: 0 0 8px #fb7185, 0 0 15px #fb7185;
+}
