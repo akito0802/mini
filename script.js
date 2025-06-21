@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const type = typeSelect.value;
         const scale = scaleSelect.value;
 
-        const scaleData = scales[key]?.[type]?.[scale];
-        if (scaleData) {
+        const scaleData = scales?.[key]?.[type]?.[scale];
+        if (scaleData && Array.isArray(scaleData)) {
             const formatted = scaleData.map(note => `${note.note}（${note.degree}）`).join(', ');
             const label = scaleSelect.options[scaleSelect.selectedIndex].text;
             result.innerHTML = `<strong>${key} ${label}の構成音:</strong><br>${formatted}`;
